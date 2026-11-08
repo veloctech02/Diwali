@@ -1,0 +1,1460 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>दीपोत्सव | रामायण की दिव्य गाथा</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Yatra+One&family=Hind:wght@400;500;600;700&display=swap');
+
+*{margin:0;padding:0;box-sizing:border-box}
+
+body{
+    background:#100914;
+    color:#fff0d0;
+    font-family:'Hind',sans-serif;
+    overflow:hidden;
+}
+
+.app{
+    height:100vh;
+    width:100%;
+    position:relative;
+    overflow:hidden;
+    background:#160c19;
+}
+
+.scene{
+    position:absolute;
+    inset:0;
+    opacity:0;
+    visibility:hidden;
+    transition:opacity 1.2s ease;
+}
+
+.scene.active{
+    opacity:1;
+    visibility:visible;
+}
+
+.sky{
+    position:absolute;
+    inset:0;
+    background:linear-gradient(180deg,#15102e,#783c54 60%,#f0a45e);
+}
+
+.forest .sky{
+    background:linear-gradient(180deg,#152d36,#456d52,#d69a62);
+}
+
+.lanka .sky{
+    background:linear-gradient(180deg,#24132e,#792d3b,#f18c45);
+}
+
+.night .sky{
+    background:linear-gradient(180deg,#090e2b,#24234c,#79405a);
+}
+
+.gold .sky{
+    background:linear-gradient(180deg,#071b35,#1b6580,#e5a75e);
+}
+
+.ayodhya .sky{
+    background:linear-gradient(180deg,#160d36,#6b3155,#f4ad60);
+}
+
+.stars{
+    position:absolute;
+    inset:0;
+    background-image:
+        radial-gradient(white 1px,transparent 2px),
+        radial-gradient(#ffd58b 1px,transparent 2px);
+    background-size:80px 80px,130px 130px;
+    animation:twinkle 4s infinite alternate;
+}
+
+@keyframes twinkle{
+    from{opacity:.2}
+    to{opacity:.8}
+}
+
+.sun{
+    position:absolute;
+    width:180px;
+    height:180px;
+    border-radius:50%;
+    background:radial-gradient(#fff2c3,#ffbd69,#e77b45);
+    right:12%;
+    top:13%;
+    box-shadow:0 0 70px #ffb45b;
+    animation:sunFloat 5s infinite alternate;
+}
+
+@keyframes sunFloat{
+    to{transform:translateY(15px)}
+}
+
+.land{
+    position:absolute;
+    bottom:0;
+    width:100%;
+    height:30%;
+    background:linear-gradient(#39243a,#130d19);
+    clip-path:polygon(
+        0 35%,15% 17%,29% 31%,44% 12%,
+        58% 32%,76% 14%,100% 27%,100% 100%,0 100%
+    );
+}
+
+.palace{
+    position:absolute;
+    bottom:18%;
+    left:50%;
+    transform:translateX(-50%);
+    width:55%;
+    height:40%;
+    border:12px solid #c58c48;
+    border-bottom:0;
+    border-radius:50% 50% 0 0;
+    box-shadow:0 0 35px #ffbd6c66;
+}
+
+.palace:before{
+    content:"";
+    position:absolute;
+    inset:20% 15% 0;
+    border:7px solid #f3ca7b;
+    border-bottom:0;
+    border-radius:50% 50% 0 0;
+}
+
+.ayodhya .palace{
+    filter:drop-shadow(0 0 18px #ffca72aa);
+}
+
+.lanka .palace{
+    width:66%;
+    height:48%;
+    border-color:#e6a04b;
+    background:linear-gradient(90deg,#54152b88,#a33d3188,#54152b88);
+}
+
+.tree{
+    position:absolute;
+    bottom:18%;
+    width:150px;
+    height:260px;
+}
+
+.tree:before{
+    content:"";
+    position:absolute;
+    bottom:0;
+    left:45%;
+    width:18px;
+    height:50%;
+    background:#69432d;
+}
+
+.tree:after{
+    content:"";
+    position:absolute;
+    bottom:30%;
+    width:100%;
+    height:70%;
+    border-radius:50%;
+    background:radial-gradient(circle,#356044 30%,#214431 70%);
+}
+
+.tree.left{left:2%}
+.tree.right{right:2%}
+
+.character{
+    position:absolute;
+    bottom:14%;
+    width:140px;
+    height:330px;
+    animation:idle 3s infinite ease-in-out;
+    filter:drop-shadow(0 10px 15px #0008);
+    transform-style:preserve-3d;
+}
+
+@keyframes idle{
+    0%,100%{translate:0 0}
+    50%{translate:0 -8px}
+}
+
+.head{
+    position:absolute;
+    top:15%;
+    left:35%;
+    width:35%;
+    height:22%;
+    border-radius:50%;
+    background:#e4ad7c;
+    border:2px solid #f8d5a0;
+    box-shadow:inset -7px -5px 9px #572b2444,inset 5px 4px 8px #fff5;
+}
+
+.head:after{
+    content:"";
+    position:absolute;
+    width:5px;
+    height:5px;
+    border-radius:50%;
+    left:48%;
+    top:48%;
+    background:#5a2019;
+    box-shadow:9px 0 #5a2019,4px 12px 3px #8e3327;
+}
+
+.body{
+    position:absolute;
+    top:36%;
+    left:25%;
+    width:50%;
+    height:43%;
+    border-radius:35% 35% 15% 15%;
+    background:#bd8050;
+    box-shadow:inset -10px -4px 12px #30140c55,inset 7px 3px 12px #fff4;
+}
+
+.body:after{
+    content:"";
+    position:absolute;
+    left:12%;
+    right:12%;
+    top:8%;
+    height:10px;
+    border-radius:50%;
+    border-top:3px solid #ffe6a2;
+}
+
+.dhoti{
+    position:absolute;
+    bottom:0;
+    left:18%;
+    width:65%;
+    height:28%;
+    background:linear-gradient(90deg,#b47721,#ffe18a,#b47721);
+    clip-path:polygon(15% 0,85% 0,100% 100%,0 100%);
+}
+
+.crown{
+    position:absolute;
+    top:3%;
+    left:32%;
+    width:40%;
+    height:18%;
+    background:linear-gradient(90deg,#a66a22,#ffe18a,#a66a22);
+    clip-path:polygon(0 100%,15% 30%,35% 45%,50% 0,65% 45%,85% 30%,100% 100%);
+    filter:drop-shadow(0 0 5px #ffda82);
+}
+
+.arm{
+    position:absolute;
+    top:43%;
+    left:10%;
+    width:20%;
+    height:30%;
+    border-radius:30px;
+    background:#e4ad7c;
+    transform:rotate(15deg);
+}
+
+.arm.right{
+    left:70%;
+    transform:rotate(-15deg);
+}
+
+.ram .head,
+.ram .body,
+.ram .arm{
+    background:linear-gradient(90deg,#255ca8,#79b9f4,#24539a);
+}
+
+.ram .dhoti{
+    background:linear-gradient(90deg,#b47721,#ffe18a,#b47721);
+}
+
+.ram .bow,.lakshman .bow{
+    position:absolute;
+    right:-17px;
+    top:28%;
+    width:38px;
+    height:170px;
+    border:5px solid #b87932;
+    border-left:0;
+    border-radius:0 100% 100% 0;
+    transform:rotate(-12deg);
+}
+
+.bow:after{
+    content:"";
+    position:absolute;
+    left:-2px;
+    top:0;
+    height:100%;
+    border-left:1px solid #ffe8b0;
+}
+
+.sita .head:before{
+    content:"";
+    position:absolute;
+    z-index:-1;
+    width:145%;
+    height:150%;
+    left:-22%;
+    top:-25%;
+    border-radius:55% 55% 12% 12%;
+    background:linear-gradient(120deg,#8d1738,#e7a0a0 55%,#75152c);
+}
+
+.sita .body{
+    background:linear-gradient(90deg,#8e1737,#e9a0a8 48%,#7b1631);
+}
+
+.sita .dhoti{
+    height:55%;
+    top:45%;
+    background:linear-gradient(90deg,#9c1d3d,#f1a0a9,#9c1d3d);
+    clip-path:none;
+    border-radius:25% 25% 0 0;
+}
+
+.lakshman .head,
+.lakshman .body,
+.lakshman .arm{
+    background:linear-gradient(90deg,#9b653b,#f1c18a,#89512f);
+}
+
+.hanuman .head,
+.hanuman .body,
+.hanuman .arm{
+    background:#ad6741;
+}
+
+.hanuman .dhoti{
+    background:linear-gradient(90deg,#a22b27,#eaa34d,#a22b27);
+}
+
+.gada{
+    position:absolute;
+    right:-28px;
+    top:42%;
+    width:18px;
+    height:105px;
+    border-radius:9px;
+    background:linear-gradient(90deg,#8c4c1c,#ffd16b,#8c4c1c);
+    transform:rotate(-18deg);
+}
+
+.gada:before{
+    content:"";
+    position:absolute;
+    top:-18px;
+    left:-9px;
+    width:34px;
+    height:34px;
+    border-radius:50%;
+    background:radial-gradient(circle at 35% 30%,#fff0a8,#c47b28 65%,#63320e);
+}
+
+.tail{
+    position:absolute;
+    left:-27px;
+    top:48%;
+    width:58px;
+    height:95px;
+    border:8px solid #ad6741;
+    border-left-color:transparent;
+    border-bottom-color:transparent;
+    border-radius:50%;
+    transform:rotate(-25deg);
+}
+
+.ravana .head{
+    background:linear-gradient(90deg,#7c2928,#e1a16a,#722020);
+}
+
+.ravana .body{
+    background:linear-gradient(90deg,#541625,#a9323b,#541625);
+}
+
+.ravana .dhoti{
+    background:linear-gradient(90deg,#4b1b2c,#c17a42,#4b1b2c);
+}
+
+.ravana-heads{
+    position:absolute;
+    top:0;
+    left:-23%;
+    width:146%;
+    height:25%;
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+}
+
+.ravana-heads i{
+    display:block;
+    width:17px;
+    height:25px;
+    border-radius:50% 50% 40% 40%;
+    background:linear-gradient(90deg,#7e342c,#efbd8b,#7e342c);
+    border:1px solid #e9b95e;
+}
+
+.caption{
+    position:absolute;
+    left:7%;
+    bottom:9%;
+    max-width:600px;
+    z-index:5;
+    text-shadow:0 3px 15px #000;
+}
+
+.caption small{
+    color:#f7c76e;
+    letter-spacing:3px;
+    font-weight:bold;
+}
+
+.caption h2{
+    font-family:'Yatra One',cursive;
+    font-size:clamp(35px,5vw,65px);
+    color:#ffe3a4;
+    margin:12px 0;
+}
+
+.caption p{
+    font-size:19px;
+    line-height:1.7;
+}
+
+.topbar{
+    position:absolute;
+    z-index:20;
+    top:20px;
+    left:25px;
+    right:25px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.logo{
+    font-family:'Yatra One',cursive;
+    color:#ffda83;
+    font-size:22px;
+}
+
+.controls{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+}
+
+button{
+    border:1px solid #e6bd72;
+    background:#25152dcc;
+    color:#ffe5ae;
+    padding:10px 16px;
+    border-radius:30px;
+    cursor:pointer;
+    font-family:inherit;
+    font-size:14px;
+    transition:.25s;
+}
+
+button:hover{
+    background:#9d552c;
+    transform:translateY(-2px);
+}
+
+button:disabled{
+    opacity:.4;
+    cursor:not-allowed;
+    transform:none;
+}
+
+.bottom{
+    position:absolute;
+    z-index:20;
+    bottom:20px;
+    left:25px;
+    right:25px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.progress{
+    position:absolute;
+    z-index:20;
+    bottom:0;
+    left:0;
+    width:100%;
+    height:5px;
+    background:#ffffff22;
+}
+
+.progressBar{
+    height:100%;
+    width:0;
+    background:#ffce76;
+    transition:width .6s;
+}
+
+.hidden{
+    display:none!important;
+}
+
+/* INTRO */
+
+.intro{
+    position:absolute;
+    inset:0;
+    z-index:50;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-direction:column;
+    text-align:center;
+    background:radial-gradient(circle,#652d38,#160c19 75%);
+    transition:opacity 1s,visibility 1s;
+}
+
+.intro.hide{
+    opacity:0;
+    visibility:hidden;
+}
+
+.intro h1{
+    font-family:'Yatra One',cursive;
+    color:#ffdf9a;
+    font-size:clamp(38px,7vw,85px);
+    text-shadow:0 0 35px #ffae45;
+}
+
+.intro p{
+    font-size:20px;
+    margin:15px 0 30px;
+    color:#ffe7c1;
+}
+
+.intro button{
+    font-size:19px;
+    padding:15px 30px;
+    background:#9c4c2b;
+}
+
+/* CURTAINS */
+
+.curtain{
+    position:absolute;
+    z-index:40;
+    inset:0;
+    display:flex;
+    pointer-events:none;
+}
+
+.curtain div{
+    width:50%;
+    height:100%;
+    background:repeating-linear-gradient(
+        90deg,#690d22,#9d1731 20px,#5d0b1c 40px
+    );
+    box-shadow:inset 0 0 70px #22000a;
+    transition:transform 2s cubic-bezier(.7,0,.2,1);
+}
+
+.curtain.open div:first-child{
+    transform:translateX(-105%);
+}
+
+.curtain.open div:last-child{
+    transform:translateX(105%);
+}
+
+.finalScreen{
+    position:absolute;
+    z-index:60;
+    inset:0;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    background:radial-gradient(circle,#71332d,#160c19 75%);
+    opacity:0;
+    visibility:hidden;
+    transition:opacity 1.5s;
+}
+
+.finalScreen.show{
+    opacity:1;
+    visibility:visible;
+}
+
+.finalScreen h1{
+    font-family:'Yatra One',cursive;
+    font-size:clamp(40px,8vw,90px);
+    color:#ffe3a4;
+    text-shadow:0 0 30px #ffb34d;
+}
+
+.finalScreen p{
+    font-size:23px;
+    margin:20px;
+}
+
+.diyas{
+    font-size:50px;
+    letter-spacing:15px;
+    animation:glow 1.5s infinite alternate;
+}
+
+@keyframes glow{
+    from{filter:drop-shadow(0 0 4px orange)}
+    to{filter:drop-shadow(0 0 20px gold)}
+}
+
+@media(max-width:650px){
+    .character{
+        width:105px;
+        height:255px;
+        bottom:18%;
+    }
+
+    .caption{
+        left:5%;
+        right:5%;
+        bottom:12%;
+    }
+
+    .caption p{font-size:15px}
+    .caption h2{font-size:35px}
+    .topbar{left:10px;right:10px;top:10px}
+    .logo{font-size:16px}
+    button{padding:7px 10px;font-size:12px}
+    .controls{gap:5px}
+    .bottom{left:10px;right:10px}
+    .palace{width:80%}
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+    <div class="intro" id="intro">
+        <h1>श्री रामायण दिव्य झाँकी</h1>
+        <p>मर्यादा, भक्ति और धर्म की अमर गाथा</p>
+        <button id="startButton">झाँकी शुरू करें • ध्वनि सहित ✨</button>
+    </div>
+
+    <div class="curtain" id="curtain">
+        <div></div>
+        <div></div>
+    </div>
+
+    <div id="storyScenes"></div>
+
+    <div class="topbar hidden" id="topbar">
+        <div class="logo">॥ जय श्री राम ॥</div>
+        <div class="controls">
+            <button id="soundButton">🔊 ध्वनि चालू</button>
+            <button id="pauseButton">Ⅱ रोकें</button>
+        </div>
+    </div>
+
+    <div class="bottom hidden" id="bottom">
+        <button id="previousButton">← पीछे</button>
+        <span id="counter">01 / 14</span>
+        <button id="nextButton">आगे बढ़ें →</button>
+    </div>
+
+    <div class="progress hidden" id="progress">
+        <div class="progressBar" id="progressBar"></div>
+    </div>
+
+    <div class="finalScreen" id="finalScreen">
+        <div class="diyas">🪔 ✨ 🪔</div>
+        <h1>शुभ दीपावली</h1>
+        <p>आप सभी को दीपावली की हार्दिक शुभकामनाएँ।</p>
+        <p>॥ जय श्री राम ॥</p>
+        <button id="replayButton">↻ झाँकी फिर से देखें</button>
+    </div>
+
+</div>
+
+<script>
+
+/* RAMAYANA STORY SCENES */
+
+const story = [
+
+{
+    theme:"ayodhya",
+    label:"मंगलमय आरंभ",
+    title:"श्री राम का जन्म",
+    text:"अयोध्या नगरी में राजा दशरथ के घर प्रभु श्री राम का जन्म हुआ। पूरी नगरी आनंद और उत्सव से भर उठी।",
+    characters:["ram"]
+},
+
+{
+    theme:"ayodhya",
+    label:"राम राज्य",
+    title:"अयोध्या का राजमहल",
+    text:"अयोध्या में श्री राम, माता सीता और लक्ष्मण प्रेम और मर्यादा के साथ जीवन व्यतीत कर रहे थे।",
+    characters:["ram","sita","lakshman"]
+},
+
+{
+    theme:"forest",
+    label:"वनगमन",
+    title:"वनवास की यात्रा",
+    text:"पिता के वचन की मर्यादा रखने के लिए श्री राम ने चौदह वर्ष का वनवास स्वीकार किया। माता सीता और लक्ष्मण भी उनके साथ वन को चले।",
+    characters:["ram","sita","lakshman"]
+},
+
+{
+    theme:"forest",
+    label:"पंचवटी",
+    title:"वन में जीवन",
+    text:"वनवास के दौरान श्री राम, माता सीता और लक्ष्मण पंचवटी में रहने लगे। वहाँ प्रकृति के बीच उनका जीवन शांतिपूर्वक बीत रहा था।",
+    characters:["ram","sita","lakshman"]
+},
+
+{
+    theme:"gold",
+    label:"स्वर्ण मृग",
+    title:"माया का स्वर्ण हिरण",
+    text:"एक दिन माता सीता ने एक सुंदर स्वर्ण मृग देखा। उनकी इच्छा पर श्री राम उस मृग के पीछे चले गए।",
+    characters:["ram","sita","lakshman"]
+},
+
+{
+    theme:"forest",
+    label:"सीता हरण",
+    title:"रावण का छल",
+    text:"रावण साधु का वेश धारण करके आया और छल से माता सीता का हरण कर लंका ले गया।",
+    characters:["sita","ravana"]
+},
+
+{
+    theme:"forest",
+    label:"खोज",
+    title:"सीता माता की खोज",
+    text:"माता सीता की खोज में श्री राम और लक्ष्मण वन-वन भटकने लगे। उनकी भेंट हनुमान जी और सुग्रीव से हुई।",
+    characters:["ram","lakshman","hanuman"]
+},
+
+{
+    theme:"night",
+    label:"हनुमान की भक्ति",
+    title:"समुद्र लांघते हनुमान",
+    text:"प्रभु श्री राम का नाम लेकर हनुमान जी विशाल समुद्र को पार करते हुए लंका की ओर बढ़े।",
+    characters:["hanuman"]
+},
+
+{
+    theme:"forest",
+    label:"अशोक वाटिका",
+    title:"माता सीता से भेंट",
+    text:"लंका की अशोक वाटिका में हनुमान जी ने माता सीता को श्री राम की अंगूठी दी और प्रभु का संदेश सुनाया।",
+    characters:["sita","hanuman"]
+},
+
+{
+    theme:"gold",
+    label:"राम सेतु",
+    title:"समुद्र पर सेतु निर्माण",
+    text:"वानर सेना ने प्रभु श्री राम के नाम का स्मरण करते हुए समुद्र पर सेतु का निर्माण किया। पूरी सेना लंका की ओर बढ़ चली।",
+    characters:["ram","lakshman","hanuman"]
+},
+
+{
+    theme:"lanka",
+    label:"धर्म और अधर्म का संग्राम",
+    title:"लंका का युद्ध",
+    text:"श्री राम की सेना और रावण की सेना के बीच युद्ध हुआ। धर्म की रक्षा के लिए प्रभु श्री राम ने अधर्म का सामना किया।",
+    characters:["ram","lakshman","hanuman","ravana"]
+},
+
+{
+    theme:"lanka",
+    label:"विजय",
+    title:"अधर्म पर धर्म की विजय",
+    text:"अंततः श्री राम ने रावण पर विजय प्राप्त की। यह विजय सत्य, धर्म और मर्यादा की विजय थी।",
+    characters:["ram","hanuman"]
+},
+
+{
+    theme:"ayodhya",
+    label:"अयोध्या वापसी",
+    title:"प्रभु श्री राम का आगमन",
+    text:"चौदह वर्ष का वनवास पूर्ण करके श्री राम, माता सीता और लक्ष्मण पुष्पक विमान से अयोध्या लौटे।",
+    characters:["ram","sita","lakshman"]
+},
+
+{
+    theme:"night",
+    label:"दीपोत्सव",
+    title:"अयोध्या में दीपावली",
+    text:"प्रभु श्री राम के स्वागत में अयोध्या नगरी को दीपों से सजाया गया। हर घर में दीप जले और पूरी नगरी आनंद से जगमगा उठी।",
+    characters:["ram","sita","lakshman","hanuman"]
+}
+
+];
+
+
+/* CHARACTER HTML */
+
+function characterHTML(type,index){
+
+    let extra="";
+
+    if(type==="ram" || type==="lakshman"){
+        extra='<div class="bow"></div>';
+    }
+
+    if(type==="hanuman"){
+        extra='<div class="gada"></div><div class="tail"></div>';
+    }
+
+    if(type==="ravana"){
+        extra='<div class="ravana-heads">'+
+        '<i></i><i></i><i></i><i></i><i></i>'+
+        '<i></i><i></i><i></i><i></i>'+
+        '</div>';
+    }
+
+    return `
+    <div class="character ${type}"
+         style="left:${12+index*19}%">
+
+        <div class="ravana-heads">
+            ${type==="ravana" ? "" : ""}
+        </div>
+
+        ${extra}
+
+        <div class="crown"></div>
+        <div class="head"></div>
+        <div class="body"></div>
+        <div class="arm"></div>
+        <div class="arm right"></div>
+        <div class="dhoti"></div>
+
+    </div>
+    `;
+}
+
+
+/* CREATE SCENES */
+
+const storyContainer=document.getElementById("storyScenes");
+
+story.forEach((item,index)=>{
+
+    const scene=document.createElement("section");
+
+    scene.className="scene "+item.theme+
+        (index===0?" active":"");
+
+    let characters="";
+
+    item.characters.forEach((character,i)=>{
+        characters+=characterHTML(character,i);
+    });
+
+    scene.innerHTML=`
+
+        <div class="sky"></div>
+        <div class="stars"></div>
+        <div class="sun"></div>
+
+        ${
+            item.theme==="forest"
+            ? '<div class="tree left"></div><div class="tree right"></div>'
+            : ''
+        }
+
+        ${
+            item.theme==="ayodhya" || item.theme==="lanka"
+            ? '<div class="palace"></div>'
+            : ''
+        }
+
+        <div class="land"></div>
+
+        ${characters}
+
+        <div class="caption">
+            <small>${item.label}</small>
+            <h2>${item.title}</h2>
+            <p>${item.text}</p>
+        </div>
+    `;
+
+    storyContainer.appendChild(scene);
+
+});
+
+
+/* AUDIO AND STORY CONTROL */
+
+let currentScene=0;
+let soundEnabled=true;
+let isPaused=false;
+let storyStarted=false;
+let narrationPlaying=false;
+let narrationFinished=false;
+let currentUtterance=null;
+let voiceList=[];
+let runToken=0;
+let advanceTimer=null;
+
+const scenes=document.querySelectorAll(".scene");
+
+const soundButton=document.getElementById("soundButton");
+const pauseButton=document.getElementById("pauseButton");
+const nextButton=document.getElementById("nextButton");
+const previousButton=document.getElementById("previousButton");
+const finalScreen=document.getElementById("finalScreen");
+
+
+/* LOAD AVAILABLE VOICES */
+
+function refreshVoices(){
+
+    if("speechSynthesis" in window){
+        voiceList=speechSynthesis.getVoices();
+    }
+
+}
+
+if("speechSynthesis" in window){
+
+    refreshVoices();
+
+    speechSynthesis.addEventListener(
+        "voiceschanged",
+        refreshVoices
+    );
+
+}
+
+
+/* CHOOSE HINDI VOICE */
+
+function chooseHindiVoice(){
+
+    const hindi=voiceList.filter(v=>
+        (v.lang||"").toLowerCase().startsWith("hi")
+    );
+
+    return hindi.find(v=>
+        /female|kalpana|heera|swara|aditi|priya/i.test(v.name)
+    ) || hindi[0] || null;
+
+}
+
+
+/* UPDATE UI */
+
+function updateScene(){
+
+    scenes.forEach((scene,i)=>{
+        scene.classList.toggle("active",i===currentScene);
+    });
+
+    document.getElementById("counter").textContent=
+        String(currentScene+1).padStart(2,"0")+
+        " / "+story.length;
+
+    document.getElementById("progressBar").style.width=
+        ((currentScene+1)/story.length*100)+"%";
+
+    nextButton.disabled=
+        soundEnabled && (!narrationFinished || narrationPlaying);
+
+    previousButton.disabled=narrationPlaying;
+
+    nextButton.textContent=
+        currentScene===story.length-1
+        ?"समापन"
+        :"आगे बढ़ें →";
+
+    soundButton.textContent=
+        soundEnabled
+        ?"🔊 ध्वनि चालू"
+        :"🔇 ध्वनि बंद";
+
+}
+
+
+/* CLEAR TIMER */
+
+function clearAdvanceTimer(){
+
+    if(advanceTimer!==null){
+        clearTimeout(advanceTimer);
+        advanceTimer=null;
+    }
+
+}
+
+
+/* SPEAK CURRENT SCENE */
+
+function speakCurrentScene(token){
+
+    if(!storyStarted || token!==runToken || isPaused){
+        return;
+    }
+
+    clearAdvanceTimer();
+
+    if(!soundEnabled){
+
+        narrationPlaying=false;
+        narrationFinished=true;
+
+        updateScene();
+        scheduleNext(token,6500);
+
+        return;
+
+    }
+
+    if(!("speechSynthesis" in window)){
+
+        alert("इस ब्राउज़र में आवाज़ उपलब्ध नहीं है।");
+
+        return;
+
+    }
+
+    const utterance=new SpeechSynthesisUtterance(
+        story[currentScene].text
+    );
+
+    utterance.lang="hi-IN";
+    utterance.rate=0.88;
+    utterance.pitch=1.05;
+    utterance.volume=1;
+
+    const voice=chooseHindiVoice();
+
+    if(voice){
+        utterance.voice=voice;
+    }
+
+    currentUtterance=utterance;
+    narrationPlaying=true;
+    narrationFinished=false;
+
+    updateScene();
+
+    utterance.onstart=()=>{
+
+        if(
+            token!==runToken ||
+            currentUtterance!==utterance
+        ) return;
+
+        narrationPlaying=true;
+        updateScene();
+
+    };
+
+    utterance.onend=()=>{
+
+        if(
+            token!==runToken ||
+            currentUtterance!==utterance
+        ) return;
+
+        currentUtterance=null;
+        narrationPlaying=false;
+        narrationFinished=true;
+
+        updateScene();
+
+        if(isPaused) return;
+
+        if(currentScene===story.length-1){
+            scheduleFinal(token,1200);
+        }else{
+            scheduleNext(token,1200);
+        }
+
+    };
+
+    utterance.onerror=(event)=>{
+
+        if(
+            token!==runToken ||
+            currentUtterance!==utterance
+        ) return;
+
+        currentUtterance=null;
+        narrationPlaying=false;
+        narrationFinished=false;
+
+        updateScene();
+
+        console.warn("Voice error:",event.error);
+
+    };
+
+    speechSynthesis.speak(utterance);
+
+}
+
+
+/* AUTO NEXT SCENE */
+
+function scheduleNext(token,delay){
+
+    clearAdvanceTimer();
+
+    advanceTimer=setTimeout(()=>{
+
+        advanceTimer=null;
+
+        if(
+            token!==runToken ||
+            isPaused ||
+            !storyStarted
+        ) return;
+
+        if(currentScene<story.length-1){
+
+            currentScene++;
+
+            updateScene();
+
+            speakCurrentScene(token);
+
+        }else{
+
+            finishStory(token);
+
+        }
+
+    },delay);
+
+}
+
+
+/* FINAL SCREEN TIMER */
+
+function scheduleFinal(token,delay){
+
+    clearAdvanceTimer();
+
+    advanceTimer=setTimeout(()=>{
+
+        advanceTimer=null;
+
+        if(
+            token===runToken &&
+            !isPaused
+        ){
+            finishStory(token);
+        }
+
+    },delay);
+
+}
+
+
+/* FINISH STORY */
+
+function finishStory(token){
+
+    if(token!==runToken) return;
+
+    clearAdvanceTimer();
+
+    narrationPlaying=false;
+    narrationFinished=true;
+    storyStarted=false;
+
+    document.getElementById("storyScenes").style.transition=
+        "opacity 1.8s ease";
+
+    document.getElementById("storyScenes").style.opacity="0";
+
+    document.getElementById("topbar").classList.add("hidden");
+    document.getElementById("bottom").classList.add("hidden");
+    document.getElementById("progress").classList.add("hidden");
+
+    setTimeout(()=>{
+
+        if(token!==runToken) return;
+
+        finalScreen.classList.add("show");
+
+    },1800);
+
+}
+
+
+/* START STORY */
+
+function startStory(){
+
+    runToken++;
+
+    const token=runToken;
+
+    clearAdvanceTimer();
+
+    if("speechSynthesis" in window){
+        speechSynthesis.cancel();
+    }
+
+    currentUtterance=null;
+    currentScene=0;
+
+    soundEnabled=true;
+    isPaused=false;
+    storyStarted=true;
+
+    narrationPlaying=false;
+    narrationFinished=false;
+
+    document.getElementById("intro").classList.add("hide");
+
+    document.getElementById("curtain").classList.add("open");
+
+    finalScreen.classList.remove("show");
+
+    document.getElementById("storyScenes").style.opacity="1";
+
+    document.getElementById("topbar").classList.remove("hidden");
+    document.getElementById("bottom").classList.remove("hidden");
+    document.getElementById("progress").classList.remove("hidden");
+
+    pauseButton.textContent="Ⅱ रोकें";
+
+    updateScene();
+
+    /* Narration starts directly from the Start button click. */
+    speakCurrentScene(token);
+
+}
+
+
+/* NEXT SCENE */
+
+function nextScene(){
+
+    if(!storyStarted) return;
+
+    if(soundEnabled && !narrationFinished){
+        return;
+    }
+
+    clearAdvanceTimer();
+
+    if(currentScene<story.length-1){
+
+        currentScene++;
+
+        updateScene();
+
+        speakCurrentScene(runToken);
+
+    }else{
+
+        finishStory(runToken);
+
+    }
+
+}
+
+
+/* PREVIOUS SCENE */
+
+function previousScene(){
+
+    if(
+        !storyStarted ||
+        narrationPlaying ||
+        currentScene===0
+    ) return;
+
+    clearAdvanceTimer();
+
+    if("speechSynthesis" in window){
+        speechSynthesis.cancel();
+    }
+
+    currentUtterance=null;
+
+    currentScene--;
+
+    narrationFinished=false;
+
+    updateScene();
+
+    speakCurrentScene(runToken);
+
+}
+
+
+/* SOUND ON / OFF */
+
+function toggleSound(){
+
+    if(!storyStarted) return;
+
+    soundEnabled=!soundEnabled;
+
+    clearAdvanceTimer();
+
+    if(!soundEnabled){
+
+        if("speechSynthesis" in window){
+            speechSynthesis.cancel();
+        }
+
+        currentUtterance=null;
+        narrationPlaying=false;
+        narrationFinished=true;
+
+        updateScene();
+
+        scheduleNext(runToken,6500);
+
+    }else{
+
+        if("speechSynthesis" in window){
+            speechSynthesis.cancel();
+        }
+
+        currentUtterance=null;
+        narrationPlaying=false;
+        narrationFinished=false;
+
+        speakCurrentScene(runToken);
+
+    }
+
+}
+
+
+/* PAUSE AND RESUME */
+
+function togglePause(){
+
+    if(!storyStarted) return;
+
+    if(!isPaused){
+
+        isPaused=true;
+
+        clearAdvanceTimer();
+
+        if("speechSynthesis" in window){
+            speechSynthesis.pause();
+        }
+
+        pauseButton.textContent="▶ जारी रखें";
+
+    }else{
+
+        isPaused=false;
+
+        pauseButton.textContent="Ⅱ रोकें";
+
+        if(
+            soundEnabled &&
+            currentUtterance &&
+            "speechSynthesis" in window
+        ){
+
+            speechSynthesis.resume();
+
+        }else if(narrationFinished){
+
+            if(currentScene===story.length-1){
+                scheduleFinal(runToken,500);
+            }else{
+                scheduleNext(runToken,500);
+            }
+
+        }else{
+
+            speakCurrentScene(runToken);
+
+        }
+
+    }
+
+}
+
+
+/* REPLAY */
+
+function replayStory(){
+
+    startStory();
+
+}
+
+
+/* BUTTON EVENTS */
+
+document.getElementById("startButton")
+    .addEventListener("click",startStory);
+
+nextButton.addEventListener("click",nextScene);
+
+previousButton.addEventListener("click",previousScene);
+
+soundButton.addEventListener("click",toggleSound);
+
+pauseButton.addEventListener("click",togglePause);
+
+document.getElementById("replayButton")
+    .addEventListener("click",replayStory);
+
+
+/* KEYBOARD CONTROLS */
+
+document.addEventListener("keydown",event=>{
+
+    if(event.code==="Space"){
+
+        event.preventDefault();
+
+        togglePause();
+
+    }
+
+    if(event.key==="ArrowRight"){
+        nextScene();
+    }
+
+    if(event.key==="ArrowLeft"){
+        previousScene();
+    }
+
+});
+
+
+updateScene();
+
+</script>
+
+</body>
+</html>
